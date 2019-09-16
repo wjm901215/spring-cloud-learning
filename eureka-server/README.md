@@ -5,6 +5,6 @@
     127.0.0.1 peer2
  2. 启动eureka服务注册中心，分别设置peer1和peer2实例进行启动<br>
     - 在idea中，配置vm options：-Dspring.profiles.active=peer2<br/>
-    ![配置](https://github.com/wjm901215/spring-cloud-learning/images/eureka-server-config.png)<br/>
+    ![配置](https://github.com/wjm901215/spring-cloud-learning/blob/master/images/eureka-server-config.png)<br/>
  3.依次启动peer1服务和peer2服务   
  4.访问：http://localhost:1111/，http://localhost:1112/
