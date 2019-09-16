@@ -8,17 +8,23 @@
     <artifactId>spring-cloud-learning</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+    </properties>
+
     <modules>
-        <module>eureka-server</module>
-        <module>eureka-provider</module>
-        <module>ribbon-consumer</module>
+        <module>chapter1/eureka-server</module>
+        <module>chapter1/eureka-provider</module>
+        <module>chapter1/ribbon-consumer</module>
     </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.8.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <dependencies>
