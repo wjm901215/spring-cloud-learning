@@ -9,7 +9,7 @@
     ![配置](https://github.com/wjm901215/spring-cloud-learning/blob/master/images/eureka-server-config.png) <br/>
     - 依次启动peer1服务和peer2服务   
     - 访问：http://localhost:1111/，http://localhost:1112/
-##eureka-provider 启动服务提供者
+## eureka-provider 启动服务提供者
     服务提供者启动多个服务
  1. 启动eureka-provider服务，方法提供,启动两个服务，保证服务的高可用<br>
     - 在idea中，配置vm options：-Dserver.port=8001 <br/>
@@ -18,7 +18,7 @@
   
  2. 页面访问：http://localhost:8001/hello 和 http://localhost:8002/hello <br/>
     页面显示Hello Word
-##ribbon-consumer 实现负载功能
+## ribbon-consumer 实现负载功能
     启动ribbon-consumer服务
  1. 访问：http://localhost:9000/ribbon-consumer，页面显示Hello Word
  2. 刷新页面，观察eureka-provider两个后台日志
