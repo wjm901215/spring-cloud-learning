@@ -6,7 +6,6 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -52,14 +51,11 @@ public class HelloController {
         if(listInstance!=null&&listInstance.size()>0){
             listInstance.forEach(serviceInstance -> log.info("/hello,host:"+serviceInstance.getHost()+",service_id:"+serviceInstance.getServiceId()));
         }
-
-        String content="";
-        Iterator<Map.Entry<String,Object>> entries= paramMap.entrySet().iterator();
-        while (entries.hasNext()){
-            Map.Entry<String,Object> entry = entries.next();
+        StringBuffer content=new StringBuffer();
+        for (Map.Entry<String, Object> entry : (Iterable<Map.Entry<String, Object>>) paramMap.entrySet()) {
             log.info("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-            content+=" Key = " + entry.getKey() + ", Value = " + entry.getValue();
+            content.append(" Key = " + entry.getKey() + ", Value = " + entry.getValue());
         }
-        return content;
+        return content.toString();
     }
 }
