@@ -20,5 +20,6 @@
     页面显示Hello Word
 ## ribbon-consumer 实现负载功能
     启动ribbon-consumer服务
- 1. 访问：http://localhost:9000/ribbon-consumer，页面显示Hello Word
+ 1. get访问：http://localhost:9000/getHelloConsumer，页面显示Hello SpiderMan
+ 1. post访问：http://localhost:9000/postHelloConsumer，页面显示Key = name, Value = SpiderMan Key = age, Value = 30
  2. 刷新页面，观察eureka-provider两个后台日志

@@ -4,11 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 总体说明
@@ -27,12 +27,39 @@ public class HelloController {
     @Autowired
     private DiscoveryClient client;
 
-    @RequestMapping("/hello")
-    public String index(){
+    /**
+     * get 测试方法
+     * @param name
+     * @return
+     */
+    @RequestMapping(value = "/hello/{name}",method = RequestMethod.GET)
+    public String index(@PathVariable("name") String name){
         List<ServiceInstance> listInstance=client.getInstances("hello-service");
         if(listInstance!=null&&listInstance.size()>0){
             listInstance.forEach(serviceInstance -> log.info("/hello,host:"+serviceInstance.getHost()+",service_id:"+serviceInstance.getServiceId()));
         }
-        return "Hello Word";
+        return "Hello "+name;
+    }
+
+    /**
+     * post 测试方法
+     * @param paramMap
+     * @return
+     */
+    @RequestMapping(value = "/postTest",method = RequestMethod.POST)
+    public String postTest(@RequestBody Map paramMap){
+        List<ServiceInstance> listInstance=client.getInstances("hello-service");
+        if(listInstance!=null&&listInstance.size()>0){
+            listInstance.forEach(serviceInstance -> log.info("/hello,host:"+serviceInstance.getHost()+",service_id:"+serviceInstance.getServiceId()));
+        }
+
+        String content="";
+        Iterator<Map.Entry<String,Object>> entries= paramMap.entrySet().iterator();
+        while (entries.hasNext()){
+            Map.Entry<String,Object> entry = entries.next();
+            log.info("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+            content+=" Key = " + entry.getKey() + ", Value = " + entry.getValue();
+        }
+        return content;
     }
 }
