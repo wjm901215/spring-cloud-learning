@@ -15,9 +15,10 @@
     </properties>
 
     <modules>
-        <module>chapter1/eureka-server</module>
-        <module>chapter1/eureka-provider</module>
-        <module>chapter1/ribbon-consumer</module>
+        <module>chapter1/mvc1</module>
+        <module>chapter2/eureka-server</module>
+        <module>chapter2/eureka-provider</module>
+        <module>chapter2/ribbon-consumer</module>
     </modules>
 
     <parent>
@@ -28,16 +29,6 @@
     </parent>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-            <version>2.1.2.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -54,6 +45,17 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+                <version>2.1.2.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <scope>test</scope>
+                <version>2.1.8.RELEASE</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
