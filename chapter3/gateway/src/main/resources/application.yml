@@ -1,0 +1,11 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: neo_route
+          uri: https://github.com/
+          predicates:
+            - After=2019-12-04T15:53:00+08:00[Asia/Shanghai]
+            - Path=/wjm901215
