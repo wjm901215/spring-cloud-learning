@@ -41,6 +41,16 @@ public class HelloController {
     }
 
     /**
+     * gateway请求测试方法，查看gateway-eureka项目
+     * @param foo
+     * @return
+     */
+    @RequestMapping("/foo")
+    public String foo(String foo) {
+        log.info("hello "+foo+"!");
+        return "hello "+foo+"!";
+    }
+    /**
      * post 测试方法
      * @param paramMap
      * @return

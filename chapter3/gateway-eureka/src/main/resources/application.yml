@@ -1,0 +1,27 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: cloud-gateway-eureka
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: add_request_parameter_route
+          # 单服务
+          #uri: http://localhost:8001
+          #格式为：lb://应用注册服务名,实现负载
+          uri: lb://HELLO-SERVICE
+          filters:
+            - AddRequestParameter=foo, bar
+          predicates:
+            - Method=GET
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:1111/eureka,http://peer2:1112/eureka
+logging:
+  level:
+    org.springframework.cloud.gateway: debug

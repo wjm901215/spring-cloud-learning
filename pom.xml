@@ -20,6 +20,7 @@
         <module>chapter2/eureka-provider</module>
         <module>chapter2/ribbon-consumer</module>
         <module>chapter3/gateway</module>
+        <module>chapter3/gateway-eureka</module>
     </modules>
 
     <parent>

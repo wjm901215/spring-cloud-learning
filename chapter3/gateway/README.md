@@ -1,4 +1,5 @@
-## yml配置详解
+# spring-gateway入门
+##yml配置详解
 ```
 spring:
   cloud:
