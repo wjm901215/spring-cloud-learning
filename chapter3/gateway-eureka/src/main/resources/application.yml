@@ -1,12 +1,30 @@
 server:
   port: 8888
+
 spring:
+#  redis:
+#    host: localhost
+#    port: 6379
+#    database: 0
   application:
     name: cloud-gateway-eureka
-  redis:
-    host: localhost
-    port: 6379
-    database: 0
+  profiles:
+    # 指定配置
+    # route_addRequestParameter:转发指定服务并传入参数
+    # route_stripPrefix：截取请求
+    # route_prefixpath :增加请求前缀
+    # route_requestratelimiter:限速路由器(验证未通过)
+    # rout_hystrix: 熔断器 (验证未通过)
+    active: route_stripPrefix
+
+
+---
+spring:
+  profiles: route_addRequestParameter
+#  redis:
+#    host: localhost
+#    port: 6379
+#    database: 0
   cloud:
     gateway:
       discovery:
@@ -14,54 +32,119 @@ spring:
           enabled: true
       routes:
 #AddRequestParameter 请求参数配置
-#        - id: add_request_parameter_route
-#          # 单服务
-#          #uri: http://localhost:8001
-#          #格式为：lb://应用注册服务名,实现负载
-#          uri: lb://HELLO-SERVICE
-#          filters:
-#            - AddRequestParameter=foo, bar
-#          predicates:
-#            - Method=GET
-
-#StripPrefix Filter 修改请求路径的过滤器
-#         - id: nameRoot
-#           uri: lb://HELLO-SERVICE
-#           predicates:
-#             - Path=/name/**
-#           filters:
-#             - StripPrefix=2
-#        - id: nameRoot
-#            uri: lb://HELLO-SERVICE
-#            filters:
-#              - PrefixPath=/mypath
-
-# PrefixPath Filter 增加请求前缀
-#        - id: prefixpath_route
-#          uri: lb://HELLO-SERVICE
-#          predicates:
-#            - Method=GET
-#          filters:
-#            - PrefixPath=/mypath
-#RequestRateLimiter TODO 限速路由器
-#        - id: requestratelimiter_route
-#          uri: lb://HELLO-SERVICE
-#          filters:
-#            #filter 名称必须是 RequestRateLimiter
-#            - name: RequestRateLimiter
-#              args:
-#                #允许用户每秒处理多少个请求
-#                redis-rate-limiter.replenishRate: 10
-#                #令牌桶的容量，允许在一秒钟内完成的最大请求数
-#                redis-rate-limiter.burstCapacity: 20
-#                #使用 SpEL 按名称引用 bean
-#                key-resolver: "#{@hostAddrKeyResolver}"
-#          predicates:
-#            - Method=GET
+        - id: add_request_parameter_route
+          # 单服务
+          #uri: http://localhost:8001
+          #格式为：lb://应用注册服务名,实现负载
+          uri: lb://HELLO-SERVICE
+          filters:
+            - AddRequestParameter=foo, bar
+          predicates:
+            - Method=GET
 eureka:
   client:
     service-url:
       defaultZone: http://peer1:1111/eureka,http://peer2:1112/eureka
+
+---
+spring:
+  profiles: route_stripPrefix
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+         - id: nameRoot
+           uri: lb://HELLO-SERVICE
+           predicates:
+             - Path=/name/**
+           filters:
+             - StripPrefix=2
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:1111/eureka,http://peer2:1112/eureka
+
+---
+spring:
+  profiles: route_prefixpath
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: prefixpath_route
+          uri: lb://HELLO-SERVICE
+          predicates:
+            - Method=GET
+          filters:
+            - PrefixPath=/mypath
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:1111/eureka,http://peer2:1112/eureka
+
+---
+spring:
+  profiles: route_requestratelimiter
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+#RequestRateLimiter TODO 限速路由器
+        - id: requestratelimiter_route
+          uri: lb://HELLO-SERVICE
+          filters:
+            #filter 名称必须是 RequestRateLimiter
+            - name: RequestRateLimiter
+              args:
+                #允许用户每秒处理多少个请求
+                redis-rate-limiter.replenishRate: 10
+                #令牌桶的容量，允许在一秒钟内完成的最大请求数
+                redis-rate-limiter.burstCapacity: 20
+                #使用 SpEL 按名称引用 bean
+                key-resolver: "#{@hostAddrKeyResolver}"
+          predicates:
+            - Method=GET
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:1111/eureka,http://peer2:1112/eureka
+---
+spring:
+  profiles: rout_hystrix
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        # 熔断器
+        - id: hystrix_route
+          uri: lb://HELLO-SERVICE
+          predicates:
+            - Path=/mypath
+          filters:
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/defaultFallback
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:1111/eureka,http://peer2:1112/eureka
+#hystrix:
+#  command:
+#    fallbackcmd:
+#      execution:
+#        isolation:
+#          thread:
+#            # 设置为3秒
+#            timeoutInMilliseconds: 3000
 logging:
   level:
     org.springframework.cloud.gateway: debug
