@@ -45,11 +45,22 @@ public class HelloController {
      * @param foo
      * @return
      */
-    @RequestMapping("/foo")
+    @RequestMapping(value = "/foo",method = RequestMethod.GET)
     public String foo(String foo) {
         log.info("hello "+foo+"!");
         return "hello "+foo+"!";
     }
+    /**
+     * gateway请求测试方法，查看gateway-eureka项目
+     * @param foo
+     * @return
+     */
+    @RequestMapping(value = "/mypath/foo",method = RequestMethod.GET)
+    public String mypathFoo(String foo) {
+        log.info("hello "+foo+"!!!!");
+        return "hello "+foo+"!!!!";
+    }
+
     /**
      * post 测试方法
      * @param paramMap
