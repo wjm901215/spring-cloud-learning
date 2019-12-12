@@ -17,6 +17,8 @@
     <modules>
         <module>chapter1/mvc1</module>
         <module>chapter1/hot-plug</module>
+        <module>chapter1/servlet-framework-client</module>
+        <module>chapter1/servlet-framework-example</module>
         <module>chapter2/eureka-server</module>
         <module>chapter2/eureka-provider</module>
         <module>chapter2/ribbon-consumer</module>
