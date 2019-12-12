@@ -1,4 +1,4 @@
-package com.spiderman.spring.eruekaserver.controller;
+package com.spiderman.app.eruekaserver.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

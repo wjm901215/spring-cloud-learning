@@ -26,7 +26,7 @@
         <!--TODO 限速路由器-->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>-->
+<!--            <artifactId>app-boot-starter-data-redis-reactive</artifactId>-->
 <!--        </dependency>-->
         <!--TODO 熔断器-->
         <dependency>

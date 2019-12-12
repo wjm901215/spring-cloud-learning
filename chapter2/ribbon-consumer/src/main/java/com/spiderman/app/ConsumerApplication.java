@@ -1,4 +1,4 @@
-package com.spiderman.spring;
+package com.spiderman.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
  * <p>具体说明</p>
  *
  * @author Spiderman
- * @version 1.0.0: com.spiderman.spring.ConsumerApplication,v 0.1 2019-09-12 17:34 Exp $$
+ * @version 1.0.0: com.spiderman.app.ConsumerApplication,v 0.1 2019-09-12 17:34 Exp $$
  */
 @SpringBootApplication
 @EnableDiscoveryClient

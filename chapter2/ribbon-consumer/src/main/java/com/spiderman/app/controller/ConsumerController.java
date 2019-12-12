@@ -1,4 +1,4 @@
-package com.spiderman.spring.controller;
+package com.spiderman.app.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.Map;
  * <p>具体说明</p>
  *
  * @author Spiderman
- * @version v1.0.0: com.spiderman.spring.eruekaserver.controller.HelloController,v 0.1 2019-09-11 19:26 Exp $$
+ * @version v1.0.0: com.spiderman.app.eruekaserver.controller.HelloController,v 0.1 2019-09-11 19:26 Exp $$
  */
 @RestController
 @Slf4j

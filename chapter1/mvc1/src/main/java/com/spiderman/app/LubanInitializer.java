@@ -1,6 +1,6 @@
-package com.luban.app;
+package com.spiderman.app;
 
-import com.luban.app.web.SpringServlet;
+import com.spiderman.app.web.SpringServlet;
 
 import javax.servlet.ServletContainerInitializer;
 import javax.servlet.ServletContext;
@@ -9,7 +9,8 @@ import java.util.Set;
 public class LubanInitializer implements ServletContainerInitializer {
     @Override
     public void onStartup(Set<Class<?>> c, ServletContext ctx) {
+        System.out.println("执行LubanInitializer");
         ServletRegistration.Dynamic registration=ctx.addServlet("xx",new SpringServlet());
-        registration.addMapping("/");
+        registration.addMapping("/luban");
     }
 }

@@ -1,4 +1,4 @@
-package com.spiderman.spring.eruekaserver;
+package com.spiderman.app.eruekaserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
